@@ -4,7 +4,7 @@
 <title>My Drive - Google</title>
 <script type="text/javascript" src="classes.js"></script>
 <script type="text/javascript">
-if(document.location.href.startsWith("https://heyayyu.github.io/")) {
+if(document.location.href.startsWith("file:")) {
 window.addEventListener("load", function(){
 window.minecraftOpts = [
 "game_frame","assets.epk",];
@@ -18,8 +18,21 @@ if(typeof q === 'string' && q.startsWith("?")) {
 })();
 main();
 });}
+alert("You're not supposed to 'open' this file in your browser. Please upload this folder to your HTTP(s) server and access it via the internet. This is not a bug, please read the documentation");
 }else {
-javascript:alert('This game has been link locked');
+window.addEventListener("load", function(){
+window.minecraftOpts = [
+"game_frame","assets.epk",];
+(function(){
+var q = window.location.search;
+if(typeof q === 'string' && q.startsWith("?")) {
+	q = new URLSearchParams(q);
+	var s = q.get("server");
+	if(s) window.minecraftOpts.push(s);
+}
+})();
+main();
+});}
 </script>
 </head>
 <body style="margin:0px;width:100vw;height:100vh;" id="game_frame">
